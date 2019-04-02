@@ -49,7 +49,7 @@ public class CellPhone {
 
 	@Override
 	public String toString() {
-		return "CellPhone [serialNum=" + serialNum + ", brand=" + brand + ", year=" + year + ", price=" + price + "]";
+		return serialNum + ": " + brand + " " + price + "$ " + year;
 	}
 
 	public long getSerialNum() {
