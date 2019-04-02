@@ -16,6 +16,7 @@ public class Assignment4Question1 {
 		nameIn = kb.next();
 		ArrayList<String> wordList = new ArrayList<String>();
 		ArrayList<String> illegal = new ArrayList<String>();
+		boolean canWrite = true;
 		illegal.add(".");
 		illegal.add(",");
 		illegal.add("!");
@@ -37,7 +38,6 @@ public class Assignment4Question1 {
 			while (sc.hasNext()) {
 				String word = sc.next();
 				word = word.toUpperCase();
-				if (!wordList.contains(word)) {
 				for (String p : illegal) {
 					if (word.contains(p)) {
 					System.out.println("Error: "+p+" found in "+word);
@@ -45,14 +45,38 @@ public class Assignment4Question1 {
 					System.out.println("The word is now: "+word);
 					}
 				}
-				wordList.add(word);
-				pw.println(word);
+				if (word.contains("’")) {
+					word = word.substring(0,word.indexOf("’"));
 				}
+				if (!wordList.contains(word)) {
+					if ((word.length()==1)&&(!word.equals("I"))&&(!word.equals("A")));//Do Nothing
+						//canWrite=false;
+					/*for (int i=0; i<10; i++) {
+						if (word.contains(i+"")) {
+							canWrite=false;
+							break;
+						}
+					}*/
+					else
+						wordList.add(word);
+				}
+			}
+			wordList.sort(null);
+			wordList.remove(0);
+			wordList.trimToSize();
+			char begin = 'a';
+			for (String a: wordList) {
+				//System.out.println(a.charAt(0));
+				//String delim = begin+"";
+				//if (a.charAt(0)==begin) {
+					//pw.println(delim.toUpperCase()+"\n==");
+					//begin++;
+				//}
+				pw.print(a+"\n");
+				System.out.println(a);
 			}
 			pw.close();
 		}
-		for(String c: wordList)
-			System.out.println(c);
 	}
 
 }
