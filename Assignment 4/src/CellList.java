@@ -80,20 +80,57 @@ public class CellList {
 		head = new CellNode(c,head);
 	}
 	
-	public void insertAtIndex(int x, CellPhone c) {
-		if (x<0 || x< size-1) 
+	public void deleteFromStart() {
+		if (head!=null) {
+			//if there's only one node, that node is deleted
+			size--;
+			if (head.node==null) {
+				head=null;
+				return;
+			}
+			head=head.node;
+		}
+		//if the head points to null, nothing happens
+	}
+	
+	public void insertAtIndex(int index, CellPhone c) {
+		if (index<0 || index< size-1) 
 			throw new NoSuchElementException();
-		if (x==0)
+		if (index==0)
 			addToStart(c);
 		else {
 			CellNode t = head;
 			//Getting to the position right before the index
-			for (int i = 0; i <x-1; i++) {
+			for (int i = 0; i <index-1; i++) {
 				t = t.node;
 			}
 			//insert the node
 			t.node = new CellNode(c, t.node);
 		}
+	}
+	
+	public void deleteAtIndex(int index) {
+		if (index<0 || index< size-1) 
+			throw new NoSuchElementException();
+		if (index==0)
+			deleteFromStart(); //deleteFromStart reduces index
+		else {
+			size--;
+			CellNode t = head;
+			CellNode s;
+			//Getting to the position right before the index
+			for (int i = 0; i <index-1; i++) {
+				t = t.node;
+			}
+			//s points to the node after t, so by making t.node point to s.node, we are skipping over a node, which becomes an orphan object
+			s = t.node;
+			t.node = s.node;
+		}
+	}
+	
+	public void replaceAtIndex(int index, CellPhone c) {
+		deleteAtIndex(index);
+		insertAtIndex(index, c);
 	}
 	
 	public boolean contains(long x) {
@@ -106,12 +143,27 @@ public class CellList {
 		return false;
 	}
 	
+	public CellNode find(long x) {
+		//
+		int counter=0;
+		CellNode t = head;
+		while(t!=null) {
+			if (t.phone.getSerialNum()==x)
+				return t;
+			t = t.node;
+			counter++;
+		}
+		//Here t is null, so 
+		return t;
+		
+	}
+	
 	public void showContents() {
 		CellNode t = head;
 		for(int i=1; t!=null; i++) {
 			System.out.print("["+t.phone+"] ---> ");
 			if (i%3==0) 
-				System.out.println();
+				System.out.println(); //to skip a line once every three nodes
 			t = t.node;
 		}
 		System.out.println("X");
