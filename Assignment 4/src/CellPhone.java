@@ -21,6 +21,7 @@ public class CellPhone {
 	}
 	
 	public CellPhone clone() {
+		//The part commented below is not necessary
 //		long input=0;
 //		Scanner kb = new Scanner(System.in);
 //		System.out.println("Please enter a new serial number:");
