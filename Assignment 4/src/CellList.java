@@ -1,5 +1,6 @@
 import java.util.NoSuchElementException;
 
+//DON'T FORGET TO NULLIFY T(not privacy issue, but good practise, since it creates a sort of backdoor otherwise)
 public class CellList {
 	private CellNode head;
 	//size is not static, since we're using an inner class
@@ -15,9 +16,11 @@ public class CellList {
 			node=null;
 			size++;
 		}
-		//Parameterized constructor
+		
+		//Parameterised constructor, this causes a privacy error, but is it necessary if we want to create meaningful nodes
+		//it is valid however, since when another class obtains an individual node, the next node must point to null
 		public CellNode(CellPhone phone, CellNode node) {
-			this.phone = phone;
+			this.phone = phone.clone();
 			this.node = node;
 			size++;
 		}
@@ -28,8 +31,14 @@ public class CellList {
 			//With the clone method, this might cause an infinite loop
 			//The copy constructor calls the clone, but the clone calls copy constructor
 			//node=c.node.clone();
-			node = c.node;
+			node = null;
 			size++;
+		}
+		
+		//No privacy issue here, since it is only used locally
+		private CellNode innerClone() {
+			//No need to increase the size here, it is increased in the copy constructor
+			return new CellNode(phone,node);
 		}
 		
 		public CellNode clone() {
@@ -62,17 +71,20 @@ public class CellList {
 	}
 	
 	public CellList(CellList c) {
+		size=0;
+		head=null;
 		if (c.size!=0) {
 			//size=c.size;	No need to set the size, it will get incremented as the nodes are cloned
-			size=0;
-			CellNode copy= c.head.clone();
+			CellNode copy= c.head.innerClone();
 			//only the head, which points to the first copy pointer is returned
 			//the copy pointer then moves along the list to copy everything
 			head = copy;
 			while(copy.node != null) {
-				copy.node = copy.node.clone();
+				copy.node = copy.node.innerClone();
 				copy = copy.node;
 			}
+			//Getting rid of the pointer
+			copy=null;
 		}
 	}
 	
