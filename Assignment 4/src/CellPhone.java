@@ -1,13 +1,12 @@
-import java.util.Scanner;
-
 public class CellPhone {
 	private long serialNum;
 	private String brand; //Always one word!
 	private int year;
 	private double price;
+	//serialNum, use a static var instead(don't ask the user)
+	private static int counter=0;
 	
 	public CellPhone(long serialNum, String brand, int year, double price) {
-		super();
 		this.serialNum = serialNum;
 		this.brand = brand;
 		this.year = year;
@@ -22,12 +21,12 @@ public class CellPhone {
 	}
 	
 	public CellPhone clone() {
-		long input=0;
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Please enter a new serial number:");
-		input = kb.nextLong();
-		kb.close();
-		return new CellPhone(input, this);
+//		long input=0;
+//		Scanner kb = new Scanner(System.in);
+//		System.out.println("Please enter a new serial number:");
+//		input = kb.nextLong();
+//		kb.close();
+		return new CellPhone(counter++, this);
 	}
 
 	@Override
