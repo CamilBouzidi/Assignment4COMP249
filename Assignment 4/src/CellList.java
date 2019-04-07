@@ -95,7 +95,7 @@ public class CellList {
 		if (!contains(c.getSerialNum())) {
 			head = new CellNode(c,head);
 		} else {
-			System.out.println("#A duplicate was spotted!#");
+			System.out.println("#A duplicate was spotted!# The phone with serial number: "+c.getSerialNum()+" will only be recorded once.");
 		}
 	}
 	
@@ -143,7 +143,7 @@ public class CellList {
 			for (int i = 0; i <index-1; i++) {
 				t = t.node;
 			}
-			//s points to the node after t, so by making t.node point to s.node, we are skipping over a node, which becomes an orphan object
+			//t.node points to the node after t, so by making t.node point to t.node.node, we are skipping over a node, which becomes an orphan object
 			t.node = t.node.node;
 		}
 	}
@@ -169,14 +169,14 @@ public class CellList {
 		CellNode t = head;
 		while(t!=null) {
 			if (t.phone.getSerialNum()==x) {
-				System.out.println("The node was found after "+counter+" tries.");
+				System.out.println("The phone was found after "+counter+" tries.");
 				return t.clone();
 			}
 			t = t.node;
 			counter++;
 		}
 		//Here t is null, so 
-		System.out.println("The node is not in the list!");
+		System.out.println("The phone is not in the list!");
 		return t;
 		
 	}
@@ -200,13 +200,13 @@ public class CellList {
 		if (getClass()!=o.getClass())
 			return false;
 		CellList l = (CellList)o;
-		if (l.size!=size)
+		if (l.size!=this.size)
 			return false;
 		//Here we know we have two lists of the same size
 		CellNode t1 = head;
 		CellNode t2 = l.head;
 		while (t1!=null) {
-			if (!t1.phone.equals(t2.phone))
+			if (t1.phone.equals(t2.phone))
 				return false;
 			t1 = t1.node;
 			t2 = t2.node;
