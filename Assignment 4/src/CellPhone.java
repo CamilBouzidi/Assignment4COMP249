@@ -72,8 +72,9 @@ public class CellPhone {
 			return false;
 		}
 		//The ID should NOT be the same
-		if (brand.equals(c.brand)&&Double.doubleToLongBits(price)==Double.doubleToLongBits(c.price)&&year==c.year)
+		if (brand.equals(c.brand)&&Double.doubleToLongBits(price)==Double.doubleToLongBits(c.price)&&year==c.year) {
 			return true;
+		}
 		return false;
 	}
 

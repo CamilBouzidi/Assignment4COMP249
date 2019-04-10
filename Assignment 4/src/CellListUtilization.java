@@ -2,7 +2,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
+/**
+ * This is the CellListUtilization class created for the Assignment 4.
+ * The sole purpose of this class is to test the CellList, CellNode, and CellPhone classes.
+ * @author Morin-Laberge, William (ID #40097269), and Bouzidi, Camil (ID #40099611)
+ * @version 4.0
+ * COMP 249 
+ * Assignment #4
+ * April 8th 2019
+ */
 public class CellListUtilization {
 
 	public static void main(String[] args) {
@@ -93,13 +101,23 @@ public class CellListUtilization {
 		System.out.println("Checking if a cellphone with ID -5 exists in list2: ");
 		list2.find(-5);
 		
+		System.out.println("Copying the list 2 into list 3");
+		CellList list3 = new CellList(list2);
+		
 		System.out.println("CHECKING THE SIZE OF LIST1: ");
 		list1.showContents();
+		list2.showContents();
 		System.out.println("Chekcking if list1 and list2 have the same contents: ");
 		if (list1.equals(list2))
 			System.out.println("list1 and list2 have the same contents.");
 		else
 			System.out.println("list1 and list2 don't have the same contents.");
+		
+		System.out.println("Chekcking if list3 and list2 have the same contents: ");
+		if (list2.equals(list3))
+			System.out.println("list3 and list2 have the same contents.");
+		else
+			System.out.println("list3 and list2 don't have the same contents.");
 		
 		System.out.println("------------------NOW TESTING EMPTY LISTS----------------");
 		CellList eList = new CellList();

@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
  * @version 4.0
  * COMP 249 
  * Assignment #4
- * April 3rd 2019
+ * April 8th 2019
  */
 public class Assignment4Question1 {
 	//I think I should create a method that check that the next word is a word, not a \!, \., etc.
