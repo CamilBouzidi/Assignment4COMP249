@@ -70,17 +70,28 @@ public class Assignment4Question1 {
 				}
 			}
 			wordList.sort(null); //sort in alphabetical order
-			wordList.remove(0); //remove the first empty entry
+			if (wordList.get(0).isEmpty()) {
+				wordList.remove(wordList.get(0));
+			}
 			wordList.trimToSize(); //reduce the size to its real size
-			char begin = 'A'; //index of the dictionary.
+			System.out.println("The character at the beginning is: "+wordList.get(0).charAt(0));
+			char begin = wordList.get(0).charAt(0); //index of the dictionary.
+			boolean indexPrinted=false;
 			for (String a: wordList) {//goes through the arraylist and checks if the first letter of the word is equal to the current index of the dictionary
 				//If it is, the index is written in the dictionary and is changed to the next letter. 
 				//It won't change until a word that starts with the next letter is reached.
 				//It also writes the words from the arraylist into the dictionary.
 				if (a.charAt(0)==begin) {
-					System.out.println(begin + "is equal to "+a.charAt(0));
+					if (!indexPrinted) {
+						System.out.println(begin + " is equal to "+a.charAt(0));
+						pw.println("\n"+begin+"\n====");
+						indexPrinted=true;
+					}
+				}else if (a.charAt(0)>begin){
+					begin=a.charAt(0);
+					System.out.println(begin + " is equal to "+a.charAt(0));
 					pw.println("\n"+begin+"\n====");
-					begin++;
+					indexPrinted=true;
 				}
 				pw.print(a+"\n");
 				System.out.println(a);
